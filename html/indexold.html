@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>devdzign.online</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #0f172a;
+            color: #f8fafc;
+            text-align: center;
+            padding: 1rem;
+            perspective: 1000px;
+        }
+
+        /* Tarjeta con transición suave y sombra dinámica */
+        .card {
+            background-color: #1e293b;
+            padding: 2.5rem 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            max-width: 500px;
+            width: 100%;
+            border: 1px solid #334155;
+            transition: transform 0.15s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .card:hover {
+            border-color: #38bdf8;
+            box-shadow: 0 25px 35px -5px rgba(56, 189, 248, 0.15);
+        }
+
+        /* Badge de estado "En vivo" con pulso */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #34d399;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            border: 1px solid rgba(52, 211, 153, 0.2);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #34d399;
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 8px rgba(52, 211, 153, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
+            }
+        }
+
+        h1 {
+            color: #38bdf8;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: #94a3b8;
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 1.75rem;
+        }
+
+        /* Botón interactivo */
+        .btn {
+            background-color: #38bdf8;
+            color: #0f172a;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            background-color: #7dd3fc;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(56, 189, 248, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="card" id="card">
+        <div class="status-badge">
+            <span class="status-dot"></span>
+            Sistema Operativo
+        </div>
+        <h1>¡Sitio Web Activo!</h1>
+        <p>Desplegado correctamente con Docker, Nginx Proxy Manager y certificado SSL en <strong>devdzign.online</strong></p>
+        <button class="btn" id="actionBtn">Copiar URL del sitio</button>
+    </div>
+
+    <script>
+        const card = document.getElementById('card');
+        const btn = document.getElementById('actionBtn');
+
+        // Efecto 3D Tilt al mover el mouse sobre la tarjeta
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            card.style.transform = `rotateY(${x / 20}deg) rotateX(${-y / 20}deg)`;
+        });
+
+        // Resetear inclinación cuando el mouse sale
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+        });
+
+        // Feedback al interactuar con el botón
+        btn.addEventListener('click', () => {
+            navigator.clipboard.writeText('https://devdzign.online');
+            const originalText = btn.textContent;
+            
+            btn.textContent = '¡Copiado al portapapeles!';
+            btn.style.backgroundColor = '#34d399';
+            btn.style.color = '#0f172a';
+
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.backgroundColor = '';
+                btn.style.color = '';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

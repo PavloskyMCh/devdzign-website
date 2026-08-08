@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>devdzign.online</title>
+    <link rel="icon" type="image/svg+xml" href="./images/logo.svg">
+    <title>Portafolio - devdzign.online</title>
     <style>
         * {
             box-sizing: border-box;
@@ -11,161 +12,492 @@
             padding: 0;
         }
 
-        body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #0f172a;
-            color: #f8fafc;
-            text-align: center;
-            padding: 1rem;
-            perspective: 1000px;
+        html {
+            scroll-behavior: smooth;
         }
 
-        /* Tarjeta con transición suave y sombra dinámica */
-        .card {
-            background-color: #1e293b;
-            padding: 2.5rem 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-            max-width: 500px;
-            width: 100%;
-            border: 1px solid #334155;
-            transition: transform 0.15s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
-            transform-style: preserve-3d;
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: 
+                linear-gradient(135deg, rgba(2, 6, 23, 0.85) 0%, rgba(15, 23, 42, 0.85) 45%, rgba(30, 41, 59, 0.85) 100%),
+                url('./images/fondo-inicio.jpg') center top/cover no-repeat scroll;
+            color: #f8fafc;
+            line-height: 1.6;
             position: relative;
         }
 
-        .card:hover {
-            border-color: #38bdf8;
-            box-shadow: 0 25px 35px -5px rgba(56, 189, 248, 0.15);
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(56, 189, 248, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(167, 139, 250, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
         }
 
-        /* Badge de estado "En vivo" con pulso */
-        .status-badge {
-            display: inline-flex;
+        .page {
+            position: relative;
+            z-index: 1;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            padding: 1rem 2rem;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 0.5rem;
-            background-color: rgba(16, 185, 129, 0.1);
-            color: #34d399;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.85rem;
+        }
+
+        .logo {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #38bdf8;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.3));
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.7rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            position: relative;
+            color: #e2e8f0;
+            text-decoration: none;
+            padding: 0.6rem 0.9rem;
+            border-radius: 999px;
             font-weight: 600;
-            margin-bottom: 1.25rem;
-            border: 1px solid rgba(52, 211, 153, 0.2);
+            transition: all 0.25s ease;
+            overflow: hidden;
         }
 
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #34d399;
-            border-radius: 50%;
-            box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
-            animation: pulse 1.8s infinite;
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(56, 189, 248, 0.18), rgba(34, 211, 238, 0.1));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+            border-radius: inherit;
+            z-index: -1;
         }
 
-        @keyframes pulse {
-            0% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
-            }
-            70% {
-                transform: scale(1);
-                box-shadow: 0 0 0 8px rgba(52, 211, 153, 0);
-            }
-            100% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
-            }
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::before,
+        .nav-links a.active::before {
+            transform: scaleX(1);
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem 4rem;
+        }
+
+        section {
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 1rem;
+            background: rgba(30, 41, 59, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            box-shadow: 0 16px 34px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            color: #38bdf8;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.8rem;
+        }
+
+        h1, h2 {
+            margin-bottom: 0.8rem;
+            color: #f8fafc;
         }
 
         h1 {
-            color: #38bdf8;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
+            font-size: 2.25rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
         }
 
         p {
-            color: #94a3b8;
-            font-size: 1rem;
-            line-height: 1.5;
-            margin-bottom: 1.75rem;
+            color: #cbd5e1;
+            margin-bottom: 1rem;
         }
 
-        /* Botón interactivo */
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
         .btn {
-            background-color: #38bdf8;
-            color: #0f172a;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            font-size: 0.95rem;
-            font-weight: 600;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
+            display: inline-block;
+            text-decoration: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 999px;
+            font-weight: 700;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
 
         .btn:hover {
-            background-color: #7dd3fc;
             transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(56, 189, 248, 0.3);
         }
 
-        .btn:active {
-            transform: translateY(0);
+        .btn-primary {
+            background: #38bdf8;
+            color: #0f172a;
+        }
+
+        .btn-secondary {
+            border: 1px solid #38bdf8;
+            color: #38bdf8;
+        }
+
+        .highlight-card {
+            padding: 1.4rem;
+            border-radius: 1rem;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.16), rgba(15, 23, 42, 0.85));
+            border: 1px solid rgba(56, 189, 248, 0.18);
+        }
+
+        .highlight-card h3 {
+            color: #7dd3fc;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-photo {
+            width: 100%;
+            max-width: 320px;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            border-radius: 0.9rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            box-shadow: 0 18px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .image-frame {
+            overflow: hidden;
+            border-radius: 1rem;
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            background: rgba(15, 23, 42, 0.7);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .project-card {
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .project-card-content {
+            padding: 1rem;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .mini-card {
+            padding: 1rem;
+            border-radius: 0.9rem;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            transition: transform 0.25s ease, border-color 0.25s ease;
+        }
+
+        .mini-card:hover {
+            transform: translateY(-4px);
+            border-color: #38bdf8;
+        }
+
+        .mini-card h3 {
+            color: #7dd3fc;
+            margin-bottom: 0.4rem;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-top: 0.8rem;
+        }
+
+        .skill-pill {
+            padding: 0.45rem 0.8rem;
+            border-radius: 999px;
+            background: rgba(56, 189, 248, 0.12);
+            color: #bae6fd;
+            font-size: 0.92rem;
+            border: 1px solid rgba(56, 189, 248, 0.16);
+        }
+
+        .contact-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(34, 211, 238, 0.1));
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            text-decoration: none;
+            color: #38bdf8;
+            font-size: 1.5rem;
+            transition: all 0.25s ease;
+        }
+
+        .social-link:hover {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(34, 211, 238, 0.2));
+            border-color: #38bdf8;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(56, 189, 248, 0.15);
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 2rem 2rem;
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero,
+            .two-col,
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-inner {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="card" id="card">
-        <div class="status-badge">
-            <span class="status-dot"></span>
-            Sistema Operativo
-        </div>
-        <h1>¡Sitio Web Activo!</h1>
-        <p>Desplegado correctamente con Docker, Nginx Proxy Manager y certificado SSL en <strong>devdzign.online</strong></p>
-        <button class="btn" id="actionBtn">Copiar URL del sitio</button>
+    <div class="page">
+        <nav>
+            <div class="nav-inner">
+                <div class="logo">
+                    <img src="./images/logo.svg" alt="Logo PabloDev" class="logo-icon">
+                    PabloDev
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#inicio" class="active">Inicio</a></li>
+                    <li><a href="#sobre-mi">Sobre mí</a></li>
+                    <li><a href="#proyectos">Proyectos</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <main>
+            <section id="inicio" class="hero">
+                <div>
+                    <div class="eyebrow">Diseño, Desarrollo Web & Soporte TI</div>
+                    <h1>Hola, soy <span style="color: #7dd3fc;">Pablo Martínez</span></h1>
+                    <p>Creo soluciones digitales completas combinando diseño estratégico, desarrollo web moderno y soporte técnico profesional para empresas y marcas que buscan destacar.</p>
+                    <div class="btn-group">
+                        <a href="#proyectos" class="btn btn-primary">Ver proyectos</a>
+                        <a href="#contacto" class="btn btn-secondary">Hablemos</a>
+                    </div>
+                </div>
+                <div class="highlight-card">
+                    <img class="profile-photo" src="./images/perfil.jpg" alt="Foto de perfil del diseñador">
+                    <h3>Mi especialidad</h3>
+                    <p>Diseño web intuitivo, desarrollo con HTML/CSS/JavaScript y soluciones de soporte técnico integral.</p>
+                    <div class="skills">
+                        <span class="skill-pill">Diseño Web</span>
+                        <span class="skill-pill">HTML/CSS</span>
+                        <span class="skill-pill">JavaScript</span>
+                        <span class="skill-pill">Soporte TI</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sobre-mi">
+                <h2>Sobre mí</h2>
+                <div class="two-col">
+                    <div>
+                        <p>Soy un profesional especializado en crear soluciones digitales que funcionan. Con experiencia en diseño web moderno, desarrollo front-end y soporte técnico profesional.</p>
+                        <p>Mi enfoque combina creatividad, funcionalidad y resultados medibles para que tu presencia digital sea efectiva y diferenciada en el mercado.</p>
+                        <p><strong>Habilidades principales:</strong> Diseño responsivo, HTML5, CSS3, JavaScript, UX/UI, branding digital y resolución de problemas técnicos.</p>
+                    </div>
+                    <div class="mini-card" style="padding: 1.2rem;">
+                        <h3>Experiencia</h3>
+                        <p>Más de 5 años creando y optimizando soluciones web para emprendedores, startups y pequeñas empresas que necesitan una presencia digital profesional y efectiva.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="proyectos">
+                <h2>Proyectos destacados</h2>
+                <div class="card-grid">
+                    <div class="mini-card project-card">
+                        <img class="project-image" src="./images/proyecto1.png" alt="Proyecto de web design 1">
+                        <div class="project-card-content">
+                            <h3>Landing Pages</h3>
+                            <p>Diseño de páginas de alto impacto con enfoque en conversión y llamados a la acción claros.</p>
+                        </div>
+                    </div>
+                    <div class="mini-card project-card">
+                        <img class="project-image" src="./images/proyecto2.png" alt="Proyecto de web design 2">
+                        <div class="project-card-content">
+                            <h3>Sitios Corporativos</h3>
+                            <p>Desarrollo web profesional para empresas con diseño moderno y navegación intuitiva.</p>
+                        </div>
+                    </div>
+                    <div class="mini-card project-card">
+                        <img class="project-image" src="./images/proyecto3.png" alt="Proyecto de web design 3">
+                        <div class="project-card-content">
+                            <h3>Portafolios Web</h3>
+                            <p>Creación de portafolios elegantes y funcionales para mostrar trabajos de forma profesional.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="servicios">
+                <h2>Mis Servicios</h2>
+                <div class="card-grid">
+                    <div class="mini-card">
+                        <h3>🎨 Diseño Web</h3>
+                        <p>Diseño visual moderno, responsivo y centrado en la experiencia del usuario para cualquier tipo de proyecto digital.</p>
+                    </div>
+                    <div class="mini-card">
+                        <h3>💻 Desarrollo Frontend</h3>
+                        <p>Implementación con HTML5, CSS3 y JavaScript para crear sitios web rápidos, seguros y optimizados.</p>
+                    </div>
+                    <div class="mini-card">
+                        <h3>🛠️ Soporte Técnico</h3>
+                        <p>Mantenimiento, actualizaciones y soporte continuo para asegurar que tu sitio funcione siempre al 100%.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contacto">
+                <h2>¿Listo para tu próximo proyecto?</h2>
+                <div class="contact-box">
+                    <p>Si buscas un profesional que combine diseño, desarrollo y soporte técnico, estaré encantado de conversar sobre tu proyecto.</p>
+                    <a href="mailto:devdzign.ve@gmail.com" class="btn btn-primary">Contactarme</a>
+                </div>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/pablo-martinez-chirinos/" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn" aria-label="Perfil de LinkedIn">in</a>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            © 2026 PabloDev - Diseño, Desarrollo & Soporte Técnico
+        </footer>
     </div>
 
     <script>
-        const card = document.getElementById('card');
-        const btn = document.getElementById('actionBtn');
+        const links = document.querySelectorAll('.nav-links a');
+        const sections = document.querySelectorAll('section');
 
-        // Efecto 3D Tilt al mover el mouse sobre la tarjeta
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-            
-            card.style.transform = `rotateY(${x / 20}deg) rotateX(${-y / 20}deg)`;
-        });
+        const updateActiveLink = () => {
+            let currentId = '';
+            sections.forEach(section => {
+                const top = section.offsetTop - 120;
+                if (window.scrollY >= top) {
+                    currentId = section.id;
+                }
+            });
 
-        // Resetear inclinación cuando el mouse sale
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'rotateY(0deg) rotateX(0deg)';
-        });
+            links.forEach(link => {
+                const linkId = link.getAttribute('href').replace('#', '');
+                link.classList.toggle('active', linkId === currentId);
+            });
+        };
 
-        // Feedback al interactuar con el botón
-        btn.addEventListener('click', () => {
-            navigator.clipboard.writeText('https://devdzign.online');
-            const originalText = btn.textContent;
-            
-            btn.textContent = '¡Copiado al portapapeles!';
-            btn.style.backgroundColor = '#34d399';
-            btn.style.color = '#0f172a';
+        window.addEventListener('scroll', updateActiveLink);
+        window.addEventListener('load', updateActiveLink);
 
-            setTimeout(() => {
-                btn.textContent = originalText;
-                btn.style.backgroundColor = '';
-                btn.style.color = '';
-            }, 2000);
+        // Efecto Parallax para la imagen de fondo
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const body = document.body;
+            body.style.backgroundPosition = `center ${scrolled * 0.5}px`;
         });
     </script>
 </body>
