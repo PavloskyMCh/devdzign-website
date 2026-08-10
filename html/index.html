@@ -15,7 +15,15 @@
                     <img src="./images/logo.svg" alt="Logo PabloDev" class="logo-icon">
                     PabloDev
                 </div>
-                <ul class="nav-links">
+
+                <!-- Botón Hamburguesa -->
+                <div class="menu-toggle" id="menu-toggle" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <ul class="nav-links" id="nav-links">
                     <li><a href="#inicio" class="active">Inicio</a></li>
                     <li><a href="#sobre-mi">Sobre mí</a></li>
                     <li><a href="#proyectos">Proyectos</a></li>
@@ -147,8 +155,22 @@
     </div>
 
     <script>
+        // --- Navegación y Scroll Spy ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinksContainer = document.getElementById('nav-links');
         const links = document.querySelectorAll('.nav-links a');
         const sections = document.querySelectorAll('section');
+
+        menuToggle && menuToggle.addEventListener('click', () => {
+            navLinksContainer.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer clic en un enlace (en móvil)
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinksContainer.classList.remove('active');
+            });
+        });
 
         const updateActiveLink = () => {
             let currentId = '';
