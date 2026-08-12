@@ -67,7 +67,7 @@ Ejecutar localmente:
 Abre la carpeta ./html con una extensión como Live Server en VS Code o sírvela mediante un contenedor Nginx local.
 
 👨‍💻 Autor
-Diseñado y desarrollado por Pablo Martínez — DevOps & Full-Stack Web Developer.
+Diseñado y desarrollado por Pablo Martínez.
 
 Website: devdzign.online
 
