@@ -40,7 +40,7 @@ El proyecto está diseñado bajo una arquitectura híbrida para maximizar la vel
                                                       
                                            [https://devdzign.online/](https://devdzign.online/)
 
-
+```
 #  Commit & Push: El desarrollador envía cambios a la rama main.
 
 GitHub Actions Trigger: El workflow .github/workflows/deploy.yml valida la sintaxis y se conecta al VPS vía SSH mediante secretos cifrados (SSH_HOST, SSH_KEY, SSH_PORT).
