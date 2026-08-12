@@ -119,10 +119,42 @@
 
             <section id="contacto">
                 <h2>¿Listo para tu próximo proyecto?</h2>
+                
+                <!-- Formulario de Contacto Asíncrono con Web3Forms -->
                 <div class="contact-box">
-                    <p>Si buscas un profesional que combine diseño, desarrollo y soporte técnico, estaré encantado de conversar sobre tu proyecto.</p>
-                    <a href="mailto:devdzign.ve@gmail.com" class="btn btn-primary">Contactarme</a>
+                    <p>Si buscas un profesional que combine diseño, desarrollo y soporte técnico, completa este formulario y conversaremos sobre tu proyecto en menos de 24 horas.</p>
+
+                    <form id="contact-form" class="contact-form" novalidate>
+                        <!-- Reemplaza "TU_ACCESS_KEY_AQUI" con tu Access Key gratuita de Web3Forms -->
+                        <input type="hidden" name="access_key" value="TU_ACCESS_KEY_AQUI">
+                        
+                        <!-- Honeypot Anti-Spam (Oculto visualmente para usuarios reales) -->
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+                        <div class="form-group">
+                            <label for="name" class="form-label">Nombre completo</label>
+                            <input type="text" id="name" name="name" class="form-input" placeholder="Ej. Carlos Mendoza" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">Correo electrónico</label>
+                            <input type="email" id="email" name="email" class="form-input" placeholder="carlos@empresa.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="form-label">Mensaje o detalles del proyecto</label>
+                            <textarea id="message" name="message" class="form-input" rows="4" placeholder="Háblanos sobre los objetivos de tu sitio web..." required></textarea>
+                        </div>
+
+                        <button type="submit" id="submit-btn" class="btn btn-primary btn-full">
+                            <span>Enviar mensaje</span>
+                        </button>
+
+                        <div id="form-result" class="form-result" aria-live="polite"></div>
+                    </form>
                 </div>
+
+                <!-- Enlaces a Redes Sociales -->
                 <div class="social-links">
                     <a href="https://wa.me/584165663717" target="_blank" rel="noopener noreferrer" class="social-link" title="WhatsApp" aria-label="Contactar por WhatsApp">
                         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -154,48 +186,7 @@
         </footer>
     </div>
 
-    <script>
-        // --- Navegación y Scroll Spy ---
-        const menuToggle = document.getElementById('menu-toggle');
-        const navLinksContainer = document.getElementById('nav-links');
-        const links = document.querySelectorAll('.nav-links a');
-        const sections = document.querySelectorAll('section');
-
-        menuToggle && menuToggle.addEventListener('click', () => {
-            navLinksContainer.classList.toggle('active');
-        });
-
-        // Cerrar menú al hacer clic en un enlace (en móvil)
-        links.forEach(link => {
-            link.addEventListener('click', () => {
-                navLinksContainer.classList.remove('active');
-            });
-        });
-
-        const updateActiveLink = () => {
-            let currentId = '';
-            sections.forEach(section => {
-                const top = section.offsetTop - 120;
-                if (window.scrollY >= top) {
-                    currentId = section.id;
-                }
-            });
-
-            links.forEach(link => {
-                const linkId = link.getAttribute('href').replace('#', '');
-                link.classList.toggle('active', linkId === currentId);
-            });
-        };
-
-        window.addEventListener('scroll', updateActiveLink);
-        window.addEventListener('load', updateActiveLink);
-
-        // Efecto Parallax para la imagen de fondo
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const body = document.body;
-            body.style.backgroundPosition = `center ${scrolled * 0.5}px`;
-        });
-    </script>
+    <!-- Script Externo con carga deferida -->
+    <script src="./js/main.js" defer></script>
 </body>
 </html>
