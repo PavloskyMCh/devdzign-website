@@ -41,8 +41,7 @@ El proyecto está diseñado bajo una arquitectura híbrida para maximizar la vel
                                            [https://devdzign.online/](https://devdzign.online/)
 
 
-
-Commit & Push: El desarrollador envía cambios a la rama main.
+#  Commit & Push: El desarrollador envía cambios a la rama main.
 
 GitHub Actions Trigger: El workflow .github/workflows/deploy.yml valida la sintaxis y se conecta al VPS vía SSH mediante secretos cifrados (SSH_HOST, SSH_KEY, SSH_PORT).
 
@@ -54,6 +53,7 @@ Carga ultra rápida: Tiempos de respuesta inferiores a 1 segundo gracias al serv
 Seguridad Mejorada: Volumen montado en solo lectura (:ro), aislamiento de contenedores Docker y ausencia de scripts o plugins vulnerables de terceros.
 
 SEO & Accesibilidad: Marcado HTML5 semántico con meta-etiquetas Open Graph y contraste validado.
+---
 
 💻 Desarrollo Local
 Si deseas clonar y ejecutar este proyecto localmente:
