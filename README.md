@@ -39,3 +39,36 @@ El proyecto está diseñado bajo una arquitectura híbrida para maximizar la vel
                                                       
                                                       
                                            [https://devdzign.online/](https://devdzign.online/)
+
+
+
+Commit & Push: El desarrollador envía cambios a la rama main.
+
+GitHub Actions Trigger: El workflow .github/workflows/deploy.yml valida la sintaxis y se conecta al VPS vía SSH mediante secretos cifrados (SSH_HOST, SSH_KEY, SSH_PORT).
+
+Despliegue Automático: Ejecuta git pull en el VPS sobre la carpeta montada en modo solo lectura (:ro) y recarga el servidor Nginx en milisegundos (nginx -s reload).
+
+⚡ Rendimiento y Buenas Prácticas
+Carga ultra rápida: Tiempos de respuesta inferiores a 1 segundo gracias al servicio de archivos estáticos puros sobre Nginx Alpine.
+
+Seguridad Mejorada: Volumen montado en solo lectura (:ro), aislamiento de contenedores Docker y ausencia de scripts o plugins vulnerables de terceros.
+
+SEO & Accesibilidad: Marcado HTML5 semántico con meta-etiquetas Open Graph y contraste validado.
+
+💻 Desarrollo Local
+Si deseas clonar y ejecutar este proyecto localmente:
+
+Clonar el repositorio:
+
+Bash
+git clone [https://github.com/PavloskyMCh/devdzign-website.git](https://github.com/PavloskyMCh/devdzign-website.git)
+cd devdzign-website
+Ejecutar localmente:
+Abre la carpeta ./html con una extensión como Live Server en VS Code o sírvela mediante un contenedor Nginx local.
+
+👨‍💻 Autor
+Diseñado y desarrollado por Pablo Martínez — DevOps & Full-Stack Web Developer.
+
+Website: devdzign.online
+
+GitHub: @PavloskyMCh
