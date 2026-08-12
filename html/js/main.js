@@ -54,16 +54,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('contact-form');
   const result = document.getElementById('form-result');
   const submitBtn = document.getElementById('submit-btn');
+  const btnText = submitBtn ? submitBtn.querySelector('span') : null;
 
-  if (form) {
+  if (form && result && submitBtn) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      // Estado visual de carga
+      const originalText = btnText ? btnText.textContent : submitBtn.textContent;
+
+      // Estado visual de carga en el botón
       submitBtn.disabled = true;
-      submitBtn.innerText = 'Enviando mensaje...';
-      result.className = 'form-result';
-      result.style.display = 'none';
+      if (btnText) {
+        btnText.textContent = 'Enviando mensaje...';
+      } else {
+        submitBtn.textContent = 'Enviando mensaje...';
+      }
+
+      // Mostrar caja de resultado
+      result.style.display = 'block';
+      result.className = 'form-result info';
+      result.innerText = 'Procesando tu mensaje...';
 
       const formData = new FormData(form);
       const object = Object.fromEntries(formData);
@@ -80,22 +90,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         const jsonResponse = await response.json();
+        console.log('Respuesta de Web3Forms:', jsonResponse); // Inspección en consola (F12)
 
-        if (response.status === 200) {
+        if (response.status === 200 && jsonResponse.success) {
+          result.style.display = 'block';
           result.className = 'form-result success';
           result.innerText = '¡Gracias! Tu mensaje ha sido enviado con éxito. Te responderemos pronto.';
           form.reset();
         } else {
+          result.style.display = 'block';
           result.className = 'form-result error';
           result.innerText = jsonResponse.message || 'Ocurrió un error al enviar. Por favor intenta de nuevo.';
         }
       } catch (error) {
+        console.error('Error de red:', error);
+        result.style.display = 'block';
         result.className = 'form-result error';
         result.innerText = 'Error de conexión. Inténtalo nuevamente más tarde.';
       } finally {
         submitBtn.disabled = false;
-        submitBtn.innerText = 'Enviar mensaje';
+        if (btnText) {
+          btnText.textContent = originalText;
+        } else {
+          submitBtn.textContent = originalText;
+        }
       }
     });
   }
-});
