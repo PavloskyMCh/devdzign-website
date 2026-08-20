@@ -4,6 +4,13 @@
     padding: 0;
 }
 
+:root {
+  --color-primario: #0d78e2;
+  --color-secundario: #499cf0;
+  --color-fondo: #f4f4f4;
+  --color-texto: #333333;
+}
+
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 40px;
@@ -60,7 +67,8 @@ nav {
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #38bdf8;
+    /*color: #38bdf8;*/
+    color: var(--color-primario);
     display: flex;
     align-items: center;
     gap: 0.6rem;
@@ -137,7 +145,8 @@ section {
 
 .eyebrow {
     display: inline-block;
-    color: #38bdf8;
+    /*color: #38bdf8;*/
+    color: var(--color-primario);
     font-size: 0.8rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -146,7 +155,7 @@ section {
 }
 
 .name-highlight {
-    color: #7dd3fc;
+    color: var(--color-primario);
 }
 
 h1, h2 {
@@ -188,13 +197,13 @@ p {
 }
 
 .btn-primary {
-    background: #38bdf8;
+    background: var(--color-primario);
     color: #0f172a;
 }
 
 .btn-secondary {
-    border: 1px solid #38bdf8;
-    color: #38bdf8;
+    border: 1px solid var(--color-primario);
+    color: var(--color-primario);
 }
 
 .highlight-card {
@@ -205,7 +214,7 @@ p {
 }
 
 .highlight-card h3 {
-    color: #7dd3fc;
+    color: var(--color-primario);
     margin-bottom: 0.5rem;
 }
 
@@ -269,11 +278,11 @@ p {
 
 .mini-card:hover {
     transform: translateY(-4px);
-    border-color: #38bdf8;
+    border-color: var(--color-primario);
 }
 
 .mini-card h3 {
-    color: #7dd3fc;
+    color: var(--color-primario);
     margin-bottom: 0.4rem;
 }
 
@@ -317,7 +326,7 @@ p {
     background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(34, 211, 238, 0.1));
     border: 1px solid rgba(56, 189, 248, 0.3);
     text-decoration: none;
-    color: #38bdf8;
+    color: var(--color-primario);
     font-size: 1.5rem;
     transition: all 0.25s ease;
 }
@@ -329,7 +338,7 @@ p {
 
 .social-link:hover {
     background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(34, 211, 238, 0.2));
-    border-color: #38bdf8;
+    border-color: var(--color-primario);
     transform: translateY(-4px);
     box-shadow: 0 8px 16px rgba(56, 189, 248, 0.15);
 }
@@ -354,7 +363,7 @@ footer {
 .menu-toggle span {
     width: 25px;
     height: 3px;
-    background-color: #38bdf8;
+    background-color: var(--color-primario);
     border-radius: 3px;
     transition: 0.3s;
 }
@@ -474,7 +483,7 @@ footer {
 
 .form-input:focus {
   outline: none;
-  border-color: #38bdf8;
+  border-color: var(--color-primario);
   box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
   background-color: rgba(15, 23, 42, 0.85);
 }
@@ -512,7 +521,7 @@ footer {
 .form-result.info {
     display: block !important;
     background-color: rgba(59, 130, 246, 0.15);
-    color: #3b82f6;
+    color: var(--color-primario);
     border: 1px solid rgba(59, 130, 246, 0.3);
 }
 
