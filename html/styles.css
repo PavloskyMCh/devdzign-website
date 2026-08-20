@@ -552,3 +552,53 @@ footer {
     font-size: 0.9rem;
   }
 }
+
+/* ==========================================================================
+   SECCION NUESTROS CLIENTES - Cinta de Logos (sin animacion)
+   ========================================================================== */
+
+#clientes {
+  width: 100%;
+  text-align: center;
+}
+
+.clientes-description {
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
+  color: #94a3b8;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Cinta de logos: fila flexible y centrada */
+.logo-cinta {
+  display: flex;
+  flex-wrap: wrap;              /* En pantallas pequenas baja a la siguiente linea */
+  justify-content: center;      /* Centra los logos horizontalmente */
+  align-items: center;          /* Alinea verticalmente */
+  gap: 3rem;                    /* Separacion uniforme entre logos */
+  padding: 1.5rem 0;
+}
+
+/* Logos: alto uniforme y proporciones contenidas */
+.cliente-logo {
+  height: 40px;                 /* Alto uniforme requerido */
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(100%) opacity(0.8);    /* Gris + intensidad reducida por defecto */
+  opacity: 0.9;
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+/* Al pasar el cursor se restaura el color */
+.cliente-logo:hover {
+  filter: grayscale(0%) opacity(1);
+  transform: scale(1.08);
+}
+
+/* Responsivo: reduce la separacion en moviles */
+@media (max-width: 640px) {
+  .logo-cinta {
+    gap: 1.5rem;
+  }
+}
