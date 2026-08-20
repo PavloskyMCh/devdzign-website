@@ -554,7 +554,7 @@ footer {
 }
 
 /* ==========================================================================
-   SECCION NUESTROS CLIENTES - Cinta de Logos (sin animacion)
+   SECCION NUESTROS CLIENTES - Carrusel Infinito de Logos
    ========================================================================== */
 
 #clientes {
@@ -570,14 +570,30 @@ footer {
   line-height: 1.6;
 }
 
-/* Cinta de logos: fila flexible y centrada */
-.logo-cinta {
+/* Contenedor del carrusel: enmascara el contenido que sale de los bordes */
+.logo-carrusel {
+  width: 100%;
+  overflow: hidden;             /* Oculta los logos fuera del area visible */
+  padding: 1rem 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+
+/* Pista flexible que se desplaza para el bucle infinito */
+.logo-pista {
   display: flex;
-  flex-wrap: wrap;              /* En pantallas pequenas baja a la siguiente linea */
-  justify-content: center;      /* Centra los logos horizontalmente */
-  align-items: center;          /* Alinea verticalmente */
+  flex-shrink: 0;               /* Evita que la pista se comprima */
+  width: max-content;           /* Mide el contenido real */
+  animation: desplazamiento 20s linear infinite;   /* Bucle infinito y continuo */
+  will-change: transform;       /* Mejora el rendimiento de la animacion */
+}
+
+/* Cada bloque de logos (el original y su duplicado) */
+.logo-bloque {
+  display: flex;
+  align-items: center;
   gap: 3rem;                    /* Separacion uniforme entre logos */
-  padding: 1.5rem 0;
+  padding: 0 1.5rem;
 }
 
 /* Logos: alto uniforme y proporciones contenidas */
@@ -596,9 +612,24 @@ footer {
   transform: scale(1.08);
 }
 
-/* Responsivo: reduce la separacion en moviles */
-@media (max-width: 640px) {
-  .logo-cinta {
-    gap: 1.5rem;
+/* Pausa la animacion al pasar el cursor */
+.logo-carrusel:hover .logo-pista {
+  animation-play-state: paused;
+}
+
+/* Desplaza la pista horizontalmente de forma continua */
+@keyframes desplazamiento {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);   /* Desplaza un bloque duplicado para el bucle */
+  }
+}
+
+/* Respeta la preferencia de menos movimiento (mantiene la animacion pero mas lenta) */
+@media (prefers-reduced-motion: reduce) {
+  .logo-pista {
+    animation-duration: 60s;   /* Ralentiza en vez de detener */
   }
 }
